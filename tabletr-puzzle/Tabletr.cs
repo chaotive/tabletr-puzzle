@@ -5,7 +5,10 @@ using System.Text;
 
 namespace tabletr_puzzle
 {
-    public class Class1
+    public class Tabletr
     {
+        public static int someFunction(int value) {
+            return value + 1;
+        }
     }
 }

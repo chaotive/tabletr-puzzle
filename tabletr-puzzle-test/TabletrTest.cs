@@ -1,14 +1,16 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using tabletr_puzzle;
 
 namespace tabletr_puzzle_test
 {
     [TestClass]
-    public class UnitTest1
+    public class TabletrTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void FunctionsTest()
         {
+            Assert.AreEqual(2, Tabletr.someFunction(1));
         }
     }
 }
