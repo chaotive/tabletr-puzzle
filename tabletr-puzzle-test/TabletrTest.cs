@@ -8,7 +8,7 @@ namespace tabletr_puzzle_test
     public class TabletrTest
     {
         [TestMethod]
-        public void FunctionsTest()
+        public void Functions()
         {
             Assert.AreEqual(2, Tabletr.someFunction(1));
         }
