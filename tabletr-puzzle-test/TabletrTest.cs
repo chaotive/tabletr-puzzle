@@ -10,7 +10,25 @@ namespace tabletr_puzzle_test
         [TestMethod]
         public void Functions()
         {
-            Assert.AreEqual(2, Tabletr.someFunction(1));
+
+
+            debugGenerateState(4);
+            debugGenerateState(4);
+            debugGenerateState(4);
+            debugGenerateState(4);
+            debugGenerateState(4);
+            debugGenerateState(4);
+            debugGenerateState(4);
+            debugGenerateState(14);
+            debugGenerateState(32);
+
+            Assert.AreNotEqual(Tabletr.generateState(2), Tabletr.generateState(2));            
+        }
+
+        void debugGenerateState(int length) {
+            Console.Write("State " + length + ": ");
+            foreach (var n in Tabletr.generateState(length)) { Console.Write(n + " "); }
+            Console.WriteLine();
         }
     }
 }
