@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using tabletr_puzzle;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace tabletr_puzzle_test
 {
@@ -8,10 +10,20 @@ namespace tabletr_puzzle_test
     public class TabletrTest
     {
         [TestMethod]
-        public void Functions()
+        public void constructor()
         {
+            var t1 = new Tabletr(5, 5, new List<int>() { 4, 2, 1 });            
+            Assert.AreEqual(3, t1.solution.Count);
+            Assert.AreEqual(25, t1.state.Count);
 
+            var t2 = new Tabletr(2, 2, new List<int>() { 4, 2, 1 }, new List<int>() { 3, 3, 0 });
+            Assert.AreEqual(3, t2.solution.Count);
+            Assert.AreEqual(3, t2.state.Count);
+        }
 
+        [TestMethod]
+        public void testGenerateState()
+        {
             debugGenerateState(4);
             debugGenerateState(4);
             debugGenerateState(4);
@@ -22,7 +34,12 @@ namespace tabletr_puzzle_test
             debugGenerateState(14);
             debugGenerateState(32);
 
-            Assert.AreNotEqual(Tabletr.generateState(2), Tabletr.generateState(2));            
+            var state1 = Tabletr.generateState(4);
+            var state2 = Tabletr.generateState(4);
+
+            Assert.AreEqual(state1.Contains(0), true);
+            Assert.AreEqual(4, state1.Count);
+            Assert.AreNotEqual(state1, state2);            
         }
 
         void debugGenerateState(int length) {
