@@ -12,13 +12,13 @@ namespace tabletr_puzzle_test
         [TestMethod]
         public void constructor()
         {
-            var t1 = new Tabletr(5, 5, new List<int>() { 4, 2, 1 });            
+            var t1 = new Tabletr(5, 5, new List<int>() { 4, 2, 1 });                    
             Assert.AreEqual(3, t1.solution.Count);
             Assert.AreEqual(25, t1.state.Count);
 
-            var t2 = new Tabletr(2, 2, new List<int>() { 4, 2, 1 }, new List<int>() { 3, 3, 0 });
-            Assert.AreEqual(3, t2.solution.Count);
-            Assert.AreEqual(3, t2.state.Count);
+            var t2 = new Tabletr(2, 2, new List<int>() { 4, 2, 1, 3}, new List<int>() { 2, 1, 0, 3 });
+            Assert.AreEqual(4, t2.solution.Count);
+            Assert.AreEqual(4, t2.state.Count);
         }
 
         [TestMethod]
