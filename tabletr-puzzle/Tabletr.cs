@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -50,13 +51,13 @@ namespace tabletr_puzzle
                 up = index - columns;
                 down = index + columns;
             }
+            
+            if (up != -1 && state[up - 1] == 0) return "up";
+            if (down != -1 && state[down - 1] == 0) return "down";
+            if (left != -1 && state[left - 1] == 0) return "left";
+            if (right != -1 && state[right - 1] == 0) return "right";
 
-            if (state[up - 1] == 0) return "up";
-            if (state[down - 1] == 0) return "down";
-            if (state[left - 1] == 0) return "left";
-            if (state[right - 1] == 0) return "right";
-
-            return null;
+            return "can't move";
         }
     }
 }
