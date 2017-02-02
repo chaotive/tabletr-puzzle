@@ -37,27 +37,44 @@ namespace tabletr_puzzle
             var up = -1;
             var down = -1;
 
-            if ( (index == 1) || (index % columns + 1 == 0) ) right = index + 1;                
-            else if (index % columns == 0) left = index - 1;
+            if ( (index == 0) || (index % columns == 0) ) right = index + 1;                
+            else if (index % columns - 1 == 0) left = index - 1;
             else {
                 left = index - 1;
                 right = index + 1;
             }
 
-            if (index <= columns) down = index + columns;
-            else if (index <= rows * columns && index > (rows * columns) - columns) up = index - columns;
+            if (index < columns) down = index + columns;
+            else if (index < rows * columns && index >= (rows * columns) - columns) up = index - columns;
             else
             {
                 up = index - columns;
                 down = index + columns;
             }
             
-            if (up != -1 && state[up - 1] == 0) return "up";
-            if (down != -1 && state[down - 1] == 0) return "down";
-            if (left != -1 && state[left - 1] == 0) return "left";
-            if (right != -1 && state[right - 1] == 0) return "right";
+            if (up != -1 && state[up] == 0) return "up";
+            if (down != -1 && state[down] == 0) return "down";
+            if (left != -1 && state[left] == 0) return "left";
+            if (right != -1 && state[right] == 0) return "right";
 
             return "can't move";
+        }
+
+        public int move(int index, string direction) {
+            var next = -1;
+            switch (direction) {
+                case "up": next = index - columns; break;
+                case "down": next = index + columns; break;
+                case "left": next = index - 1; break;
+                case "right": next = index + 1; break;
+            }
+
+            var oldElem = state[index];
+            var newElem = state[next];
+            state[index] = state[newElem];
+            state[next] = oldElem;
+
+            return next;
         }
     }
 }
