@@ -12,6 +12,7 @@ namespace tabletr_puzzle
         public int columns;
         public List<int> solution;
         public List<int> state;
+        public bool completed = false;
         
         public Tabletr(int rows, int columns, List<int> solution, List<int> initialState = null) {
             var length = rows * columns;
@@ -74,7 +75,19 @@ namespace tabletr_puzzle
             state[index] = state[newElem];
             state[next] = oldElem;
 
+            completed = checkCompleted(solution, state);
+
             return next;
+        }
+
+        public int tryAndMove(int index) {
+            var d = tryMove(index);
+            if (d == "can't move") { return -1; }
+            else return move(index, d);
+        }
+
+        public static bool checkCompleted(List<int> solution, List<int> state) {
+            return Enumerable.SequenceEqual(solution, state);            
         }
     }
 }

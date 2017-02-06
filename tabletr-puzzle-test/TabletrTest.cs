@@ -22,6 +22,21 @@ namespace tabletr_puzzle_test
         }
 
         [TestMethod]
+        public void usage()
+        {
+            var t1 = new Tabletr(2, 2, new List<int>() { 0, 2, 1, 3 }, new List<int>() { 2, 1, 0, 3 });
+            /* Pending, should test it with 2x2 or bigger matrixs */
+        }
+
+        [TestMethod]
+        public void testTryAndMove()
+        {
+            var t1 = new Tabletr(2, 2, new List<int>() { 0, 2, 1, 3 }, new List<int>() { 2, 1, 0, 3 });
+            Assert.AreEqual(-1, t1.tryAndMove(1));
+            Assert.AreEqual(2, t1.tryAndMove(0));
+        }
+
+        [TestMethod]
         public void testTryMove()
         {
             var t1 = new Tabletr(2, 2, new List<int>() { 0, 2, 1, 3 }, new List<int>() { 2, 1, 0, 3 });
@@ -76,6 +91,17 @@ namespace tabletr_puzzle_test
             Console.Write("State " + length + ": ");
             foreach (var n in Tabletr.generateState(length)) { Console.Write(n + " "); }
             Console.WriteLine();
+        }
+
+        [TestMethod]
+        public void testCheckCompleted()
+        {      
+            Assert.AreEqual(false, Tabletr.checkCompleted( new List<int>() { 0 }, new List<int>() { 1 } ));
+            Assert.AreEqual(false, Tabletr.checkCompleted(new List<int>() { 0 }, new List<int>() { 0, 0 }));
+            Assert.AreEqual(false, Tabletr.checkCompleted(new List<int>() { 0, 1, 2 }, new List<int>() { 1, 2, 0 }));
+
+            Assert.AreEqual(true, Tabletr.checkCompleted(new List<int>() { 0, 0 }, new List<int>() { 0, 0 }));
+            Assert.AreEqual(true, Tabletr.checkCompleted(new List<int>() { 0, 1, 2 }, new List<int>() { 0, 1, 2 }));
         }
     }
 }
