@@ -60,8 +60,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\tabletr-puzzle\tabletr-puzzle.csproj">
-      <Project>{d1c797ee-62b6-49f6-abd6-c48bac5d2183}</Project>
+    <ProjectReference Include="..\tabletr-puzzle-cl35\tabletr-puzzle.csproj">
+      <Project>{f329b34b-274c-4ea0-9e35-e396f4d87c89}</Project>
       <Name>tabletr-puzzle</Name>
     </ProjectReference>
   </ItemGroup>

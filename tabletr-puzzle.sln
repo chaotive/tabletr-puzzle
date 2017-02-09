@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tabletr-puzzle", "tabletr-puzzle\tabletr-puzzle.csproj", "{D1C797EE-62B6-49F6-ABD6-C48BAC5D2183}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tabletr-puzzle-test", "tabletr-puzzle-test\tabletr-puzzle-test.csproj", "{A94E6080-33F8-4C55-82ED-21DA2FDF4A49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tabletr-puzzle", "tabletr-puzzle-cl35\tabletr-puzzle.csproj", "{F329B34B-274C-4EA0-9E35-E396F4D87C89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D1C797EE-62B6-49F6-ABD6-C48BAC5D2183}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D1C797EE-62B6-49F6-ABD6-C48BAC5D2183}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D1C797EE-62B6-49F6-ABD6-C48BAC5D2183}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D1C797EE-62B6-49F6-ABD6-C48BAC5D2183}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A94E6080-33F8-4C55-82ED-21DA2FDF4A49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A94E6080-33F8-4C55-82ED-21DA2FDF4A49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A94E6080-33F8-4C55-82ED-21DA2FDF4A49}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A94E6080-33F8-4C55-82ED-21DA2FDF4A49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F329B34B-274C-4EA0-9E35-E396F4D87C89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F329B34B-274C-4EA0-9E35-E396F4D87C89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F329B34B-274C-4EA0-9E35-E396F4D87C89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F329B34B-274C-4EA0-9E35-E396F4D87C89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
