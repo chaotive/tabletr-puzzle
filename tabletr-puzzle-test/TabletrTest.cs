@@ -32,12 +32,12 @@ namespace tabletr_puzzle_test
         public void testTryAndMove()
         {
             var t1 = new Tabletr(2, 2, new List<string>() { "", "2", "1", "3" }, new List<string>() { "2", "1", "", "3" });
-            Assert.AreEqual(-1, t1.tryAndMove(1));
-            Assert.AreEqual(2, t1.tryAndMove(0));
+            Assert.AreEqual(-1, t1.tryAndMoveIndex(1));
+            Assert.AreEqual(2, t1.tryAndMoveIndex(0));
         }
 
         [TestMethod]
-        public void testTryMove()
+        public void testTryMoveIndex()
         {
             var t1 = new Tabletr(2, 2, new List<string>() { "", "2", "1", "3" }, new List<string>() { "2", "1", "", "3" });
             Assert.AreEqual("down", t1.tryMove(0));
@@ -56,12 +56,29 @@ namespace tabletr_puzzle_test
         public void testMove()
         {
             var t1 = new Tabletr(2, 2, new List<string>() { "", "2", "1", "3" }, new List<string>() { "2", "1", "", "3" });
-            Assert.AreEqual(2, t1.move(0, "down"));            
-            Assert.AreEqual(0, t1.move(1,"left"));
+            Assert.AreEqual("down", t1.move("2"));
+            Assert.AreEqual("left", t1.move("1"));
+            Assert.AreEqual("", t1.move(""));
+            Assert.AreEqual("right", t1.move("1"));
+            Assert.AreEqual("", t1.move("3"));
 
             var t2 = new Tabletr(2, 2, new List<string>() { "", "2", "1", "3" }, new List<string>() { "1", "", "2", "3" });
-            Assert.AreEqual(1, t2.move(0, "right"));            
-            Assert.AreEqual(0, t2.move(2, "up"));
+            Assert.AreEqual("right", t2.move("1"));
+            Assert.AreEqual("", t2.move(""));
+            Assert.AreEqual("up", t2.move("2"));
+            Assert.AreEqual("left", t2.move("3"));
+        }
+
+        [TestMethod]
+        public void testMoveIndex()
+        {
+            var t1 = new Tabletr(2, 2, new List<string>() { "", "2", "1", "3" }, new List<string>() { "2", "1", "", "3" });
+            Assert.AreEqual(2, t1.moveIndex(0, "down"));            
+            Assert.AreEqual(0, t1.moveIndex(1,"left"));
+
+            var t2 = new Tabletr(2, 2, new List<string>() { "", "2", "1", "3" }, new List<string>() { "1", "", "2", "3" });
+            Assert.AreEqual(1, t2.moveIndex(0, "right"));            
+            Assert.AreEqual(0, t2.moveIndex(2, "up"));
         }
 
         [TestMethod]

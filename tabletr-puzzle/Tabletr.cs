@@ -65,7 +65,7 @@ namespace tabletr_puzzle
             return "can't move";
         }
 
-        public int move(int index, string direction) {
+        public int moveIndex(int index, string direction) {
             var next = -1;
             switch (direction) {
                 case "up": next = index - columns; break;
@@ -84,10 +84,21 @@ namespace tabletr_puzzle
             return next;
         }
 
-        public int tryAndMove(int index) {
+        public int tryAndMoveIndex(int index) {
             var d = tryMove(index);
             if (d == "can't move") { return -1; }
-            else return move(index, d);
+            else return moveIndex(index, d);
+        }
+
+        public string move(string value)
+        {
+            var index = state.IndexOf(value);
+            var d = tryMove(index);
+            if (d == "can't move") { return ""; }
+            else {
+                moveIndex(index, d);
+                return d;
+            } 
         }
 
         public static bool checkCompleted(List<string> solution, List<string> state) {
