@@ -10,21 +10,25 @@ namespace tabletr_puzzle
     {
         public int rows;
         public int columns;
-        public List<int> solution;
-        public List<int> state;
+        public List<string> solution;
+        public List<string> state;
         public bool completed = false;
         
-        public Tabletr(int rows, int columns, List<int> solution, List<int> initialState = null) {
+        public Tabletr(int rows, int columns, List<string> solution, List<string> initialState = null) {
             var length = rows * columns;
             this.rows = rows;
             this.columns = columns;
             this.solution = solution;
-            state = initialState ?? generateState(length);            
+            state = initialState ?? generateIntState(length);            
         }
 
-        public static List<int> generateState(int length) {
+        public static List<string> generateIntState(int length) {
             var random = new Random(Guid.NewGuid().GetHashCode());
-            return Enumerable.Range(0, length).OrderBy(x => random.Next()).ToList();
+            return Enumerable.Range(0, length).
+                OrderBy(x => random.Next()).
+                ToList().
+                ConvertAll<string>(x => 
+                    x.ToString().Replace("0", ""));
         }
 
         public string tryMove(int index) {
@@ -53,10 +57,10 @@ namespace tabletr_puzzle
                 down = index + columns;
             }
             
-            if (up != -1 && state[up] == 0) return "up";
-            if (down != -1 && state[down] == 0) return "down";
-            if (left != -1 && state[left] == 0) return "left";
-            if (right != -1 && state[right] == 0) return "right";
+            if (up != -1 && state[up] == "") return "up";
+            if (down != -1 && state[down] == "") return "down";
+            if (left != -1 && state[left] == "") return "left";
+            if (right != -1 && state[right] == "") return "right";
 
             return "can't move";
         }
@@ -72,7 +76,7 @@ namespace tabletr_puzzle
 
             var oldElem = state[index];
             var newElem = state[next];
-            state[index] = state[newElem];
+            state[index] = newElem;
             state[next] = oldElem;
 
             completed = checkCompleted(solution, state);
@@ -86,7 +90,7 @@ namespace tabletr_puzzle
             else return move(index, d);
         }
 
-        public static bool checkCompleted(List<int> solution, List<int> state) {
+        public static bool checkCompleted(List<string> solution, List<string> state) {
             return Enumerable.SequenceEqual(solution, state);            
         }
     }
