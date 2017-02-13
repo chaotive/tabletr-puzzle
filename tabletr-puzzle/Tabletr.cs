@@ -92,13 +92,18 @@ namespace tabletr_puzzle
 
         public string move(string value)
         {
-            var index = state.IndexOf(value);
-            var d = tryMove(index);
-            if (d == "can't move") { return ""; }
-            else {
-                moveIndex(index, d);
-                return d;
-            } 
+            if (completed == true) return "completed";
+            else
+            {
+                var index = state.IndexOf(value);
+                var d = tryMove(index);
+                if (d == "can't move") return "";
+                else
+                {
+                    moveIndex(index, d);
+                    return d;
+                }
+            }
         }
 
         public static bool checkCompleted(List<string> solution, List<string> state) {

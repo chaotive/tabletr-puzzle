@@ -67,6 +67,10 @@ namespace tabletr_puzzle_test
             Assert.AreEqual("", t2.move(""));
             Assert.AreEqual("up", t2.move("2"));
             Assert.AreEqual("left", t2.move("3"));
+
+            var t3 = new Tabletr(2, 2, new List<string>() { "", "2", "1", "3" }, new List<string>() { "2", "", "1", "3" });
+            Assert.AreEqual("right", t3.move("2"));
+            Assert.AreEqual("completed", t3.move("2"));
         }
 
         [TestMethod]
