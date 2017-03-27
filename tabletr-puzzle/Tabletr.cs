@@ -32,22 +32,25 @@ namespace tabletr_puzzle
         }
 
         public string tryMove(int index) {
-            // 1  2  3  4
-            // 5  6  7  8
-            // 9 10 11 12
-            //13 14 15 16
-
+            // 1 2 3
+            // 4 5 6
+            // 7 8 9
+            
             var left = -1;
             var right = -1;
             var up = -1;
             var down = -1;
 
+            Console.WriteLine(index % (columns - 1));
+            Console.WriteLine(columns - 1);
+
             if ( (index == 0) || (index % columns == 0) ) right = index + 1;                
-            else if (index % columns - 1 == 0) left = index - 1;
+            else if ((index + 1) % columns == 0) left = index - 1;
             else {
                 left = index - 1;
                 right = index + 1;
             }
+            Console.WriteLine(left + " " + right + " " + up + " " + down);
 
             if (index < columns) down = index + columns;
             else if (index < rows * columns && index >= (rows * columns) - columns) up = index - columns;
@@ -96,7 +99,11 @@ namespace tabletr_puzzle
             else
             {
                 var index = state.IndexOf(value);
+
+                state.ForEach(n => Console.WriteLine(n));                
+                Console.WriteLine("index " + index);
                 var d = tryMove(index);
+                Console.WriteLine(d);
                 if (d == "can't move") return "";
                 else
                 {

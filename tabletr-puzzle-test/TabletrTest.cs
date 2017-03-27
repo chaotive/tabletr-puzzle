@@ -29,6 +29,30 @@ namespace tabletr_puzzle_test
         }
 
         [TestMethod]
+        public void usage3x3()
+        {
+            var t1 = new Tabletr(3, 3, new List<string>() {
+                "1", "2", "3",
+                "4", "5", "6",
+                "7", "8", ""
+            }, new List<string>() {
+                "1", "5", "2",
+                "7", "4", "3",
+                "", "8", "6"
+            });
+            
+            Assert.AreEqual("down", t1.move("7"));
+            Assert.AreEqual("left", t1.move("4"));
+            Assert.AreEqual("down", t1.move("5"));
+            Assert.AreEqual("left", t1.move("2"));
+            Assert.AreEqual("up", t1.move("3"));
+            Assert.AreEqual("up", t1.move("6"));
+
+            Assert.AreEqual(true, t1.completed);            
+            Assert.AreEqual("completed", t1.move("6"));
+        }
+
+        [TestMethod]
         public void testTryAndMove()
         {
             var t1 = new Tabletr(2, 2, new List<string>() { "", "2", "1", "3" }, new List<string>() { "2", "1", "", "3" });
@@ -50,6 +74,18 @@ namespace tabletr_puzzle_test
             Assert.AreEqual("can't move", t2.tryMove(1));
             Assert.AreEqual("can't move", t2.tryMove(2));
             Assert.AreEqual("up", t2.tryMove(3));
+
+            var t3 = new Tabletr(3, 3, new List<string>() {
+                "1", "2", "3",
+                "4", "5", "6",
+                "7", "8", ""
+            }, new List<string>() {
+                "1", "5", "2",
+                "7", "4", "3",
+                "", "8", "6"
+            });
+
+            Assert.AreEqual("", t3.move("3"));
         }
 
         [TestMethod]
