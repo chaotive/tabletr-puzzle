@@ -40,18 +40,14 @@ namespace tabletr_puzzle
             var right = -1;
             var up = -1;
             var down = -1;
-
-            Console.WriteLine(index % (columns - 1));
-            Console.WriteLine(columns - 1);
-
+            
             if ( (index == 0) || (index % columns == 0) ) right = index + 1;                
             else if ((index + 1) % columns == 0) left = index - 1;
             else {
                 left = index - 1;
                 right = index + 1;
             }
-            Console.WriteLine(left + " " + right + " " + up + " " + down);
-
+            
             if (index < columns) down = index + columns;
             else if (index < rows * columns && index >= (rows * columns) - columns) up = index - columns;
             else
@@ -98,12 +94,9 @@ namespace tabletr_puzzle
             if (completed == true) return "completed";
             else
             {
-                var index = state.IndexOf(value);
-
-                state.ForEach(n => Console.WriteLine(n));                
-                Console.WriteLine("index " + index);
+                var index = state.IndexOf(value);                
                 var d = tryMove(index);
-                Console.WriteLine(d);
+                
                 if (d == "can't move") return "";
                 else
                 {
