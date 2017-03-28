@@ -2,23 +2,30 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using tabletr_puzzle;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace tabletr_puzzle_test
 {
     [TestClass]
     public class TabletrTest
     {                
-        [TestMethod]
+        [TestMethod]        
         public void constructor()
         {
-            /* var t1 = new Tabletr(5, 5, new List<string>() { "", "2", "1" }, 1);
-            Assert.AreEqual(3, t1.solutionSequence.Count);
-            Assert.AreEqual(25, t1.state.Count); */
-
+            var t1 = new Tabletr(2, 2, new List<string>() { "", "3", "2", "1" }, 3);
+            Assert.AreEqual(4, t1.solutionSequence.Count);
+            Assert.AreEqual(4, t1.state.Count);
+            
             var t2 = new Tabletr(2, 2, new List<string>() { "", "2", "1", "3" }, new List<string>() { "2", "1", "", "3" });
             Assert.AreEqual(4, t2.solutionSequence.Count);
-            Assert.AreEqual(4, t2.state.Count);            
+            Assert.AreEqual(4, t2.state.Count);                        
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException),
+            "complexity")]
+        public void constructor_exceptions()
+        {            
+            var t3 = new Tabletr(2, 2, new List<string>() { "", "3", "2", "1" }, 4);
         }
 
         [TestMethod]
@@ -29,7 +36,7 @@ namespace tabletr_puzzle_test
         }
 
         [TestMethod]
-        public void usage3x3_1()
+        public void usage3x3_fixed()
         {
             var t1 = new Tabletr(3, 3, new List<string>() {
                 "1", "2", "3",
@@ -52,25 +59,20 @@ namespace tabletr_puzzle_test
             Assert.AreEqual("completed", t1.move("6"));
         }
 
-        public void usage3x3_2()
+        [TestMethod]
+        public void usage3x3_dynamic()
         {
             var t1 = new Tabletr(3, 3, new List<string>() {
                 "1", "2", "3",
                 "4", "5", "6",
                 "7", "8", ""
-            }, new List<string>() {
-                "1", "5", "2",
-                "7", "4", "3",
-                "", "8", "6"
+            }, 8);
+
+            t1.solution.moves.Reverse();
+            t1.solution.moves.ForEach(m => {
+                t1.move(m.value);
             });
-
-            Assert.AreEqual("down", t1.move("7"));
-            Assert.AreEqual("left", t1.move("4"));
-            Assert.AreEqual("down", t1.move("5"));
-            Assert.AreEqual("left", t1.move("2"));
-            Assert.AreEqual("up", t1.move("3"));
-            Assert.AreEqual("up", t1.move("6"));
-
+            
             Assert.AreEqual(true, t1.completed);
             Assert.AreEqual("completed", t1.move("6"));
         }
@@ -144,39 +146,6 @@ namespace tabletr_puzzle_test
             Assert.AreEqual(0, t2.moveIndex(2, "up"));
         }
         
-        [TestMethod]
-        public void testGenerateSolution()
-        {
-            /*
-            debugGenerateState(4);
-            debugGenerateState(4);
-            debugGenerateState(4);
-            debugGenerateState(4);
-            debugGenerateState(4);
-            debugGenerateState(4);
-            debugGenerateState(4);
-            debugGenerateState(14);
-            debugGenerateState(32);
-            */
-
-            /*
-            var state1 = Tabletr.generateSolution(4);
-            var state2 = Tabletr.generateSolution(4);
-
-            Assert.AreEqual(state1.Contains(""), true);
-            Assert.AreEqual(4, state1.Count);
-            Assert.AreNotEqual(state1, state2);   
-            */         
-        }
-
-        /*
-        void debugGenerateState(int length) {
-            Console.Write("State " + length + ": ");
-            foreach (var n in Tabletr.generateSolution(length)) { Console.Write(n + " "); }
-            Console.WriteLine();
-        }
-        */
-
         [TestMethod]
         public void testCheckCompleted()
         {      

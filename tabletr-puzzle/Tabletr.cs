@@ -22,56 +22,19 @@ namespace tabletr_puzzle
         public Tabletr(int rows, int columns, List<string> solutionSequence, List<string> initialState) :
             this(rows, columns, solutionSequence, 0, initialState) { }
        
-        private Tabletr(int rows, int columns, List<string> solutionSequence, int complexity, List<string> initialState) {                
+        private Tabletr(int rows, int columns, List<string> solutionSequence, int complexity, List<string> initialState) {
+            if (complexity >= solutionSequence.Count) throw new ArgumentOutOfRangeException("complexity");
+
             this.rows = rows;
             this.columns = columns;
             this.solutionSequence = solutionSequence;
             this.complexity = complexity;
-            if (initialState == null) solution = generateSolution(this);                                
+            if (initialState == null) solution = Solution.generate(this);                                
             else state = initialState;
 
             completed = false;
         }
-
-        public static Solution generateSolution(Tabletr tp) {
-            var random = new Random(Guid.NewGuid().GetHashCode());             
-            var validMoves = 0;
-            
-            tp.state = tp.solutionSequence;
-            var spaceIndex = tp.state.IndexOf("");
-            var index = 0;
-            if (spaceIndex == 0) index = spaceIndex + 1;
-            else index = spaceIndex - 1;
-            var value = tp.state[index];
-            var direction = tp.tryMove(index);
-            var moves = new List<MoveOp>() { new MoveOp(value, direction) };
-            tp.state[spaceIndex] = value;
-            tp.state[index] = "";
-
-            Console.WriteLine("tp.state: " + tp.state);
-
-            return new Solution();
-            
-            /*while (validMoves < tp.complexity) {
-                var x = (random.Next(tp.solutionSequence.Count) + 1).ToString();
-                var r = tp.move(x);
-                if (! (r == "" || r == "completed"))  
-                {
-                    validMoves++;
-                    moves.Add(new MoveOp());
-                }                 
-            }
-            
-            //tp.state = algo;
-
-            return new Solution(Enumerable.Range(0, solutionSequence.Count).
-                OrderBy(x => random.Next()).
-                ToList().
-                ConvertAll<string>(x => 
-                    x.ToString().Replace("0", "")));*/
-        }
-        
-
+                      
         public string tryMove(int index) {
             // 1 2 3
             // 4 5 6
