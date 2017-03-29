@@ -27,14 +27,7 @@ namespace tabletr_puzzle_test
         {            
             var t3 = new Tabletr(2, 2, new List<string>() { "", "3", "2", "1" }, 4);
         }
-
-        [TestMethod]
-        public void usage()
-        {
-            var t1 = new Tabletr(2, 2, new List<string>() { "", "2", "1", "3" }, new List<string>() { "2", "1", "", "3" });
-            /* Pending, should test it with 2x2 or bigger matrixs */
-        }
-
+        
         [TestMethod]
         public void usage3x3_fixed()
         {

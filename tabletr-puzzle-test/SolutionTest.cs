@@ -24,8 +24,8 @@ namespace tabletr_puzzle_test
                 new List<string>() { "", "3", "2", "1" });
             t2.complexity = 1;
 
-            var solution1 = Solution.generate(t1);
-            Assert.AreEqual(3, solution1.moves.Count);
+            var solution1 = Solution.generate(t1);            
+            Assert.AreEqual(true, solution1.moves.Count <= 3);
             CollectionAssert.AreNotEqual(solution1.initialState, solution1.solutionSequence);
 
             var solution2 = Solution.generate(t2);
