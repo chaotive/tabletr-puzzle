@@ -11,6 +11,7 @@ namespace tabletr_puzzle
         public List<string> initialState;
         public List<string> solutionSequence;
         public List<MoveOp> moves;
+        public static int maxSteps = 3;
 
         public Solution(List<string> solutionSequence, List<string> initialState, List<MoveOp> moves)
         {
@@ -21,15 +22,13 @@ namespace tabletr_puzzle
 
         public static Solution generate(Tabletr tp)
         {
-            var random = new Random(Guid.NewGuid().GetHashCode());
-
             Debug.WriteLine("solutionSequence:");
             tp.solutionSequence.ForEach(tpv => Debug.Write(" " + tpv));
             Debug.WriteLine("");
 
+            var random = new Random(Guid.NewGuid().GetHashCode());            
             tp.state = new List<string>();
-            tp.solutionSequence.ForEach(s => tp.state.Add(s));
-            var validMoves = 1;
+            tp.solutionSequence.ForEach(s => tp.state.Add(s));            
             var spaceIndex = tp.state.IndexOf("");
             var index = 0;
 
@@ -41,21 +40,36 @@ namespace tabletr_puzzle
             var moves = new List<MoveOp>() { new MoveOp(value, direction) };
             tp.state[spaceIndex] = value;
             tp.state[index] = "";
+            Debug.WriteLine("spaceIndex: " + spaceIndex + " index: " + index);
+
+            doGenerationStep(0, tp, random, moves, value);
 
             Debug.WriteLine("state:");
             tp.state.ForEach(tpv => Debug.Write(" " + tpv));
-            Debug.WriteLine("\nspaceIndex: " + spaceIndex + " index: " + index);
+            Debug.WriteLine("");
 
-            var usedValues = new List<string>() { value };
+            Debug.WriteLine("moves:");
+            moves.ForEach(mo => Debug.WriteLine(mo.value + " " + mo.direction));
+            
+            return new Solution(tp.solutionSequence, tp.state, moves);
+        }
+
+        private static void doGenerationStep (int step, Tabletr tp, Random random, List<MoveOp> moves, string ignoredValue) {
+            Debug.WriteLine("STEP " + step);
+
+            var usedValues = new List<string>();
+            usedValues.Add(ignoredValue);
             var availableValues = Enumerable.Range(1, tp.solutionSequence.Count - 1).
                 OrderBy(x => random.Next()).
                 ToList().
                 ConvertAll<string>(x =>
                     x.ToString());
-            availableValues.Remove(value);
-            
+            availableValues.Remove(ignoredValue);
+            var validMoves = 0;
+            validMoves = 1;
+
             while (validMoves < tp.complexity)
-            {                
+            {
                 var i = 0;
                 var v = "";
                 var d = "";
@@ -77,10 +91,20 @@ namespace tabletr_puzzle
                 availableValues.Remove(v);
             }
 
-            Debug.WriteLine("moves:");
-            moves.ForEach(mo => Debug.WriteLine(mo.value + " " + mo.direction));
-            
-            return new Solution(tp.solutionSequence, tp.state, moves);
+            step++;
+            if (step < maxSteps)
+            {
+                var newIgnoredValue = "";
+                foreach (string uv in usedValues) {
+                    if (uv != ignoredValue)
+                    {
+                        newIgnoredValue = uv;
+                        break;
+                    }
+                }
+                
+                doGenerationStep(step, tp, random, moves, newIgnoredValue);
+            }
         }
     }
 }
